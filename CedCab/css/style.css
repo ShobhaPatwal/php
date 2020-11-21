@@ -78,7 +78,7 @@ body {
     
 }
 #book .book-form #message .alert-primary {
-    background: #ced4daf7;
+    background: #fff;
 }
 #book .booknow .box {
     text-align:center;
@@ -255,6 +255,12 @@ display: none;
     #book .book-form .content-box .form-box .input-group .custom-select, .input-group-prepend, #book .book-form .content-box .form-box .input-group .form-control {
         font-size: 12px;
     }
+}
+@media (max-width:402px) {  
+    .input-group-prepend {
+        display:none;
+    }
+    
 }
 /* footer */
 .footer {
