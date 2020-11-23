@@ -5,33 +5,32 @@ $operator = $_GET['operator'];
 $opt = $_GET['opt'];
 $operand = array();
 $result;
-function insert($previousVal, $displayVal) {
-    global $operand;
-    array_push($operand, $previousVal, $displayVal);
-    return $operand;
-}
-$operand = insert($previousVal, $displayVal);
 function operation($operator) {
-    global $operand, $opt;
+    global $previousVal, $displayVal, $opt;
     switch ($opt) {
         case '+':
-            $result = $operand[0] + $operand[1];
+            $result = $previousVal + $displayVal;
             $opt = $operator;
             break;
         case '-':
-            $result = $operand[0] - $operand[1];
+            $result = $previousVal - $displayVal;
             $opt = $operator;
             break;
         case '*':
-            $result = $operand[0] * $operand[1];
+            $result = $previousVal * $displayVal;
             $opt = $operator;
             break;
         case '/':
-            $result = $operand[0] / $operand[1];
+            if ($displayVal == 0) {
+                $result = 'infinite';
+            } 
+            else {
+                $result = $previousVal / $displayVal;
+            }
             $opt = $operator;
             break;
         case '=':
-            $result = $operand[0];
+            $result = $previousVal;
             $opt = $operator;
             break;  
         default:
@@ -45,5 +44,4 @@ $array['result'] = $result;
 $array['operator'] = $opt;
 $calculate = json_encode($array);
 echo $calculate;
-
 ?>

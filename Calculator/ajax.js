@@ -1,9 +1,15 @@
 $(document).ready(function(){
-    var displayVal = '';
+    var displayVal = 0;
     var previousValue = 0;
     var opt = '+';
     $('input.number').on('click',function(){
-        displayVal += $(this).val();
+        if ($('#result').val() == 0) {
+            displayVal = $(this).val();
+        }
+        else {
+            console.log(displayVal);
+            displayVal += $(this).val();
+        }
         $('#result').val(displayVal);
     });
     $('.operator').on('click', function() {
@@ -18,7 +24,16 @@ $(document).ready(function(){
                 $('#result').val(result['result']);
                 displayVal = '';
                 previousValue = result['result'];
-                opt = result['operator'];
+                if (previousValue == "infinite") {
+                    alert("Number cannot be divided by 0");
+                    $('#result').val('0');
+                    displayVal = 0;
+                    previousValue = 0;
+                    opt = '+'; 
+                }
+                else {
+                    opt = result['operator'];
+                }
             },
             error: function() {
                 alert('Error');
@@ -27,7 +42,8 @@ $(document).ready(function(){
     });
     $('#clear').on('click',function(){
         $('#result').val('0');
-        displayVal = '';
+        displayVal = 0;
+        previousValue = 0;
         opt = '+'; 
     });
 });
